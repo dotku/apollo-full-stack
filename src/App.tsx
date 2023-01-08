@@ -1,8 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import ReactShoppingList from "./page/react-shopping-list";
 
 function App() {
+  return <ReactShoppingList />;
+}
+function AppReact() {
   return (
     <div className="App">
       <header className="App-header">
