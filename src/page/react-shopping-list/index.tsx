@@ -8,7 +8,7 @@ export interface ShoppingItem {
   content: string;
 }
 
-const defaultTodos = [
+const defaultShoppingItems = [
   {
     id: nanoid(),
     content: "apple",
@@ -33,7 +33,7 @@ export interface ShoppingListFormElement extends HTMLFormElement {
 
 export default function ReactShoppingList() {
   const [shoppingItems, setShoppingItems] =
-    useState<ShoppingItem[]>(defaultTodos);
+    useState<ShoppingItem[]>(defaultShoppingItems);
 
   console.log("shoppingItems", shoppingItems);
 
