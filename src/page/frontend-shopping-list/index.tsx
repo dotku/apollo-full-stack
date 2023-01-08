@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import ShoppingItemAddForm from "./components/ShoppingItemAddForm";
 import ShoppingItemList from "./components/ShoppingItemList";
 import { nanoid } from "nanoid";
