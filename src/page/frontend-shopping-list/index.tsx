@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import ShoppingItemAddForm from "./components/ShoppingItemAddForm";
 import ShoppingItemList from "./components/ShoppingItemList";
 import { nanoid } from "nanoid";
@@ -44,9 +44,16 @@ export default function FrontendShoppingList({
     setKeywords("");
   };
 
-  const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
-    setKeywords(e.currentTarget.value);
+  const handleInputChange = (e: any) => {
+    console.log("handleInputChange", e.target.value);
+    setKeywords(e.target.value);
   };
+
+  // useEffect(() => {
+  //   return () => {
+  //     debouncedInputChange.cancel();
+  //   };
+  // }, []);
 
   return (
     <div className="container">

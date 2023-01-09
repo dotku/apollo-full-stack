@@ -8,7 +8,7 @@ export default function ShoppingItemAddForm({
 }: {
   value?: string;
   handleItemCreate: (e: FormEvent<ShoppingListFormElement>) => void;
-  handleInputChange?: (e: FormEvent<HTMLInputElement>) => void;
+  handleInputChange?: any;
 }) {
   return (
     <form onSubmit={handleItemCreate}>

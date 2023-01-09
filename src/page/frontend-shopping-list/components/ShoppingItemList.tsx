@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { ShoppingItemType } from "../../../types/ShoppingItemType";
 
 export default function ShoppingItemList({
@@ -9,12 +10,17 @@ export default function ShoppingItemList({
   keywords?: string;
   handleItemRemove: (id: string) => () => void;
 }) {
-  if (keywords) {
-    items = items.filter((item) => item.content.includes(keywords));
-  }
-  return items && items.length ? (
+  const newItems = useMemo(
+    () =>
+      keywords
+        ? items.filter((item) => item.content.includes(keywords))
+        : items,
+    [keywords, items]
+  );
+
+  return newItems && newItems.length ? (
     <ul className="list-group list-group-flush">
-      {items.map((item, idx) => (
+      {newItems.map((item, idx) => (
         <li
           className="list-group-item d-flex justify-content-between"
           key={idx}
