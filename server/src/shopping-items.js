@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
         ? shoppingItems.filter((item) => item.content.includes(q))
         : shoppingItems
     );
-  }, 3000);
+  }, 1000);
 });
 
 router.get("/:id", (req, res) => {

@@ -6,6 +6,7 @@ export default function useFetch<DataType>(url: string) {
   const [error, setError] = useState();
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(url)
       .then((rsp) => rsp.json())
       .then((rsp) => setData(rsp))
