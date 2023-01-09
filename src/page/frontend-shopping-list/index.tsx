@@ -1,10 +1,9 @@
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
 import ShoppingItemAddForm from "./components/ShoppingItemAddForm";
 import ShoppingItemList from "./components/ShoppingItemList";
 import { nanoid } from "nanoid";
 import { ShoppingItemType } from "../../types/ShoppingItemType";
 import { Helmet } from "react-helmet";
-import { debounce } from "lodash";
 
 interface FormElements extends HTMLFormControlsCollection {
   contentInput: HTMLInputElement;
@@ -48,12 +47,6 @@ export default function FrontendShoppingList({
     console.log("handleInputChange", e.target.value);
     setKeywords(e.target.value);
   };
-
-  // useEffect(() => {
-  //   return () => {
-  //     debouncedInputChange.cancel();
-  //   };
-  // }, []);
 
   return (
     <div className="container">
