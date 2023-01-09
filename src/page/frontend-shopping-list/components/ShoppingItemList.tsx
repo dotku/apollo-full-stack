@@ -8,7 +8,7 @@ export default function ShoppingItemList({
 }: {
   items?: ShoppingItemType[];
   keywords?: string;
-  handleItemRemove: (id: string) => () => void;
+  handleItemRemove?: <IDType, EventType>(id: IDType) => (e?: EventType) => void;
 }) {
   const newItems = useMemo(
     () =>
@@ -26,7 +26,10 @@ export default function ShoppingItemList({
           key={idx}
         >
           <span>{item.content}</span>
-          <span className="btn" onClick={handleItemRemove(item.id)}>
+          <span
+            className="btn"
+            onClick={handleItemRemove && handleItemRemove(item.id)}
+          >
             x
           </span>
         </li>

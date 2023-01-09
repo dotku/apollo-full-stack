@@ -36,7 +36,14 @@ router.delete("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body);
+  console.log("req", req.body);
+  shoppingItems.push({
+    id: nanoid(),
+    content: req?.body?.content,
+  });
+  res.json({
+    data: shoppingItems,
+  });
 });
 
 //Routes will go here

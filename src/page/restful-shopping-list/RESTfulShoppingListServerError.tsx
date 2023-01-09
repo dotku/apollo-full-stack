@@ -10,9 +10,9 @@ export default function RESTfulShoppingListServerError() {
         <title>{TITLE}</title>
       </Helmet>
       <h2 className="pt-3">{TITLE}</h2>
-      <RESTfulShoppingListContent
+      {/* <RESTfulShoppingListContent
         server={"http://localhost:3030/shopping-item"}
-      />
+      /> */}
     </div>
   );
 }

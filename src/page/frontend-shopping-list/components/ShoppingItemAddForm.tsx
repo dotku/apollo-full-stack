@@ -2,18 +2,18 @@ import { ShoppingListFormElement } from "..";
 import { FormEvent } from "react";
 
 export default function ShoppingItemAddForm({
-  value,
+  formRef,
   placeholder,
   handleItemCreate,
   handleInputChange,
 }: {
-  value?: string;
+  formRef?: any;
   placeholder?: string;
   handleItemCreate?: (e: FormEvent<ShoppingListFormElement>) => void;
   handleInputChange?: any;
 }) {
   return (
-    <form onSubmit={handleItemCreate}>
+    <form onSubmit={handleItemCreate} ref={formRef}>
       <div className="input-group">
         <input
           id="contentInput"

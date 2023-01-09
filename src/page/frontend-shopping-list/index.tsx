@@ -23,9 +23,11 @@ export default function FrontendShoppingList({
   );
   const [keywords, setKeywords] = useState<string>("");
 
-  const handleItemRemove = (id: string) => () => {
-    setShoppingItems((items) => items.filter((item) => item.id !== id));
-  };
+  const handleItemRemove =
+    <T1, T2>(id: T1) =>
+    (_e: T2) => {
+      setShoppingItems((items) => items.filter((item) => item.id !== id));
+    };
 
   const handleItemCreate = (e: FormEvent<ShoppingListFormElement>) => {
     e.preventDefault();
@@ -55,7 +57,6 @@ export default function FrontendShoppingList({
       <h2 className="pt-3">Shopping List</h2>
       <div style={{ maxWidth: 500, padding: 10 }}>
         <ShoppingItemAddForm
-          value={keywords}
           handleItemCreate={handleItemCreate}
           handleInputChange={handleInputChange}
         />
