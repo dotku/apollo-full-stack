@@ -9,8 +9,16 @@ const shoppingItems = [
   { id: nanoid(), content: "duck" },
 ];
 
-router.get("/", (_req, res) => {
-  res.json(shoppingItems);
+router.get("/", (req, res) => {
+  const { q } = req.query;
+
+  setTimeout(() => {
+    res.json(
+      q
+        ? shoppingItems.filter((item) => item.content.includes(q))
+        : shoppingItems
+    );
+  }, 3000);
 });
 
 router.get("/:id", (req, res) => {
