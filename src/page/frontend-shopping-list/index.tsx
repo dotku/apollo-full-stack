@@ -2,26 +2,7 @@ import { FormEvent, useState } from "react";
 import ShoppingItemAddForm from "./components/ShoppingItemAddForm";
 import ShoppingItemList from "./components/ShoppingItemList";
 import { nanoid } from "nanoid";
-
-export interface ShoppingItem {
-  id: string;
-  content: string;
-}
-
-const defaultShoppingItems = [
-  {
-    id: nanoid(),
-    content: "apple",
-  },
-  {
-    id: nanoid(),
-    content: "banna",
-  },
-  {
-    id: nanoid(),
-    content: "cake",
-  },
-];
+import { ShoppingItemType } from "../../types/ShoppingItemType";
 
 interface FormElements extends HTMLFormControlsCollection {
   contentInput: HTMLInputElement;
@@ -31,11 +12,14 @@ export interface ShoppingListFormElement extends HTMLFormElement {
   elements: FormElements;
 }
 
-export default function ReactShoppingList() {
-  const [shoppingItems, setShoppingItems] =
-    useState<ShoppingItem[]>(defaultShoppingItems);
-
-  console.log("shoppingItems", shoppingItems);
+export default function FrontendShoppingList({
+  defaultData,
+}: {
+  defaultData?: ShoppingItemType[];
+}) {
+  const [shoppingItems, setShoppingItems] = useState<ShoppingItemType[]>(
+    defaultData || []
+  );
 
   const handleItemRemove = (id: string) => () => {
     setShoppingItems((items) => items.filter((item) => item.id !== id));
@@ -44,10 +28,8 @@ export default function ReactShoppingList() {
   const handleFormSubmit = (e: FormEvent<ShoppingListFormElement>) => {
     e.preventDefault();
     const content = e.currentTarget.elements.contentInput.value;
-    // console.log(e.currentTarget.elements["contentInput"].value);
-    console.log("ShoppingItems", shoppingItems);
 
-    setShoppingItems((curr: ShoppingItem[]) => {
+    setShoppingItems((curr: ShoppingItemType[]) => {
       return [
         ...curr,
         {

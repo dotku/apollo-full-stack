@@ -1,8 +1,9 @@
 import "./App.css";
-import ReactShoppingList from "./page/frontend-shopping-list";
+import { defaultShoppingItems } from "./data/DefaultShoppingItems";
+import FrontendShoppingList from "./page/frontend-shopping-list";
 
 function App() {
-  return <ReactShoppingList />;
+  return <FrontendShoppingList defaultData={defaultShoppingItems} />;
 }
 
 export default App;

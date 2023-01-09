@@ -1,10 +1,10 @@
-import { ShoppingItem } from "..";
+import { ShoppingItemType } from "../../../types/ShoppingItemType";
 
 export default function ShoppingItemList({
   items = [],
   handleItemRemove,
 }: {
-  items: ShoppingItem[];
+  items: ShoppingItemType[];
   handleItemRemove: (id: string) => () => void;
 }): JSX.Element {
   return items.length ? (
