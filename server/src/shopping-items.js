@@ -2,7 +2,7 @@ import express from "express";
 import { nanoid } from "nanoid";
 
 const router = express.Router();
-const shoppingItems = [
+let shoppingItems = [
   { id: nanoid(), content: "apple" },
   { id: nanoid(), content: "banna" },
   { id: nanoid(), content: "chiken" },
@@ -21,13 +21,22 @@ router.get("/", (req, res) => {
   }, 1000);
 });
 
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  console.log("id", id);
-  const result = shoppingItems.filter((item) => item.id === id);
-  result.length
-    ? res.json(shoppingItems.filter((item) => item.id === id))
-    : res.status(404).send("Not found");
+router.get("/:keywords", (req, res) => {
+  const { keywords } = req.params;
+  console.log("id", keywords);
+  const result = shoppingItems.filter(
+    (item) => item.id === keywords || item.content.includes(keywords)
+  );
+  result.length ? res.json(result) : res.status(404).send([]);
+});
+
+router.delete("/:id", (req, res) => {
+  shoppingItems = shoppingItems.filter((item) => item.id !== req.params.id);
+  res.json(shoppingItems);
+});
+
+router.post("/", (req, res) => {
+  console.log(req.body);
 });
 
 //Routes will go here
