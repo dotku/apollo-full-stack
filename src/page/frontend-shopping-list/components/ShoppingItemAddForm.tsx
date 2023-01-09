@@ -2,17 +2,23 @@ import { ShoppingListFormElement } from "..";
 import { FormEvent } from "react";
 
 export default function ShoppingItemAddForm({
-  handleFormSubmit,
+  value,
+  handleItemCreate,
+  handleInputChange,
 }: {
-  handleFormSubmit: (e: FormEvent<ShoppingListFormElement>) => void;
+  value?: string;
+  handleItemCreate: (e: FormEvent<ShoppingListFormElement>) => void;
+  handleInputChange?: (e: FormEvent<HTMLInputElement>) => void;
 }) {
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleItemCreate}>
       <div className="input-group">
         <input
+          value={value || ""}
           id="contentInput"
           placeholder="Place Your Item"
           className="form-control"
+          onChange={handleInputChange}
           required
         />
         <button className="btn btn-outline-secondary" type="submit">

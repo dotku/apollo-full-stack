@@ -2,12 +2,17 @@ import { ShoppingItemType } from "../../../types/ShoppingItemType";
 
 export default function ShoppingItemList({
   items = [],
+  keywords,
   handleItemRemove,
 }: {
-  items: ShoppingItemType[];
+  items?: ShoppingItemType[];
+  keywords?: string;
   handleItemRemove: (id: string) => () => void;
-}): JSX.Element {
-  return items.length ? (
+}) {
+  if (keywords) {
+    items = items.filter((item) => item.content.includes(keywords));
+  }
+  return items && items.length ? (
     <ul className="list-group list-group-flush">
       {items.map((item, idx) => (
         <li
