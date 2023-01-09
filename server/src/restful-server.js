@@ -1,8 +1,15 @@
 import express from "express";
 import bodyParser from "body-parser";
 import shoppingItems from "./shopping-items.js";
+import cors from "cors";
 
 var app = express();
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+  })
+);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
