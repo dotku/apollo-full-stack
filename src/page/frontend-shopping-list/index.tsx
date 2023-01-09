@@ -43,9 +43,8 @@ export default function FrontendShoppingList({
     setKeywords("");
   };
 
-  const handleInputChange = (e: any) => {
-    console.log("handleInputChange", e.target.value);
-    setKeywords(e.target.value);
+  const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
+    setKeywords(e.currentTarget.value);
   };
 
   return (
