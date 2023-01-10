@@ -4,7 +4,8 @@ import FrontendShoppingList from "./page/frontend-shopping-list";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import AppReact from "./App.React";
 import RESTfulShoppingList from "./page/restful-shopping-list";
-import RESTfulShoppingListServerError from "./page/restful-shopping-list/RESTfulShoppingListServerError";
+import ZustandGetStarted from "./page/zustand-get-started";
+import ZustandShoppingList from "./page/zustand-shopping-list";
 
 // @note, use hashRouter here for github hosting
 // github page won't able to support browserRouter due to server-side rendering
@@ -24,8 +25,12 @@ const router = createHashRouter([
     element: <RESTfulShoppingList />,
   },
   {
-    path: "/restful-server-error",
-    element: <RESTfulShoppingListServerError />,
+    path: "/zustand-get-started",
+    element: <ZustandGetStarted />,
+  },
+  {
+    path: "/zustand-shopping-list",
+    element: <ZustandShoppingList />,
   },
 ]);
 
