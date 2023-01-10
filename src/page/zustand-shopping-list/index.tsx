@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { useRef } from "react";
+import { FormEvent, useRef } from "react";
 import create from "zustand";
 import { ShoppingItemType } from "../../types/ShoppingItemType";
 
@@ -45,14 +45,23 @@ function ZustandShoppingList() {
 
   return (
     <div>
-      <ul>
-        {shoppingItems.map((item, idx) => (
-          <li key={item.id}>
-            {item.content}
-            <button onClick={() => deleteShoppingItem(item.id)}>delete</button>
-          </li>
-        ))}
-      </ul>
+      {shoppingItems.length ? (
+        <ul>
+          {shoppingItems.map((item, idx) => (
+            <li key={idx} className="lh-lg">
+              {item.content}
+              <button
+                className="btn "
+                onClick={() => deleteShoppingItem(item.id)}
+              >
+                x
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <span>Empty Content</span>
+      )}
     </div>
   );
 }
@@ -63,15 +72,18 @@ function ZustandController() {
     (state: StateType) => state.createShoppingItem
   );
 
-  const handleItemCreate = () => {
+  const handleItemCreate = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     addShoppingItem(inputRef.current?.value);
     // inputRef.current = "";
   };
 
   return (
     <>
-      <input ref={inputRef} />
-      <button onClick={handleItemCreate}>Create</button>
+      <form onSubmit={handleItemCreate}>
+        <input ref={inputRef} />
+        <button type="submit">Create</button>
+      </form>
     </>
   );
 }
