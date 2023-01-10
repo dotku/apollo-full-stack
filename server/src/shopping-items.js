@@ -23,9 +23,8 @@ router.get("/", (req, res) => {
 
 router.get("/:keywords", (req, res) => {
   const { keywords } = req.params;
-  console.log("id", keywords);
-  const result = shoppingItems.filter(
-    (item) => item.id === keywords || item.content.includes(keywords)
+  const result = shoppingItems.filter((item) =>
+    item.content.toLowerCase().includes(keywords.toLowerCase())
   );
   result.length ? res.json(result) : res.status(404).send([]);
 });
@@ -36,7 +35,6 @@ router.delete("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log("req", req.body);
   shoppingItems.push({
     id: nanoid(),
     content: req?.body?.content,
@@ -46,5 +44,4 @@ router.post("/", (req, res) => {
   });
 });
 
-//Routes will go here
 export default router;
