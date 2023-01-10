@@ -1,5 +1,12 @@
 import { debounce } from "lodash";
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Helmet } from "react-helmet";
 import SimpleWarning from "../../components/SimpleWarning";
 import useFetch from "../../hook/useFetch";
@@ -16,39 +23,41 @@ interface Env {
 const { REACT_APP_DEBOUNCE_WAIT, REACT_APP_SERVER_URL } = process.env as Env;
 const TITLE = "RESTful Shoping List";
 
+// @todo need improve the feature
+
 export default function RESTfulShoppingList() {
-  const { isLoading, data, error } = useFetch<ShoppingItemType[]>(
+  // @todo query will cause useCallback keep running
+  const { isLoading, data, error, del, post } = useFetch<ShoppingItemType[]>(
     `${REACT_APP_SERVER_URL}/shopping-items`
   );
 
+  const [ifAlert, setIfAlert] = useState(error ? true : false);
   const [keywords, setKeywords] = useState<string>("");
   const [items, setItems] = useState<ShoppingItemType[] | undefined>([]);
-  const [appError, setAppError] = useState<
-    Error | undefined | Boolean | string
-  >(error);
   const [appIsLoading, setAppIsLoading] = useState(true);
   const searchInputRef = useRef<HTMLInputElement>();
   const formRef = useRef<HTMLFormElement>();
 
-  const fetchData = () => {
-    setItems(data);
-    setAppIsLoading(isLoading);
-    setAppError(error || "");
+  const fetchData = useCallback(() => {
+    setAppIsLoading(true);
     fetch(`${REACT_APP_SERVER_URL}/shopping-items/${keywords}`)
       .then((rsp) => rsp.json())
       .then((rsp) => setItems(rsp))
       .catch((error) => {
         console.error(error);
-        setAppError(error);
+        setIfAlert(true);
       })
       .finally(() => setAppIsLoading(false));
-  };
+  }, [keywords]);
 
   useEffect(() => {
     fetchData();
-  }, [keywords]);
+  }, [fetchData]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // @note keywords and the inut view should be splited for debouncing
+    // update purpose; keywords would be the final string for query, and
+    // input would be just the view for the user
     setKeywords(e.target.value);
   };
 
@@ -61,29 +70,19 @@ export default function RESTfulShoppingList() {
     return () => {
       debounceHandleInputChange.cancel();
     };
-  });
-
-  const handleItemRemove =
-    <T1, T2>(id: T1) =>
-    (_e: T2) => {
-      fetch(`${REACT_APP_SERVER_URL}/shopping-items/${id}`, {
-        method: "DELETE",
-      })
-        .then((rsp) => rsp.json())
-        .then((rsp) => setItems(rsp))
-        .catch((e) => {});
-    };
+  }, [debounceHandleInputChange]);
 
   const handleItemCreate = (e: FormEvent<ShoppingListFormElement>) => {
     e.preventDefault();
-    fetch(`${REACT_APP_SERVER_URL}/shopping-items`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: keywords }),
-    })
-      .then((rsp) => rsp.json())
-      .then((rsp) => setItems(rsp.data))
-      .catch((error) => setAppError(error))
+    const { elements } = formRef.current as ShoppingListFormElement;
+
+    // @note change keywords would cause the program re-fetch data, no
+    // rsp.json() is required
+    post({ content: elements.contentInput.value })
+      .catch((error) => {
+        console.error(error);
+        setIfAlert(true);
+      })
       .finally(() => {
         setKeywords("");
         if (searchInputRef) {
@@ -92,12 +91,24 @@ export default function RESTfulShoppingList() {
       });
   };
 
+  const handleItemRemove =
+    <IDType, EventType>(id: IDType) =>
+    (_e: EventType) => {
+      del(`${REACT_APP_SERVER_URL}/shopping-items/${id}`)
+        .then(() => fetchData())
+        .catch((e) => {
+          console.error(e);
+          setIfAlert(true);
+        });
+    };
+
   return (
     <div className="container">
       <Helmet>
         <title>{TITLE}</title>
       </Helmet>
       <h2 className="pt-3">{TITLE}</h2>
+      {ifAlert && <SimpleWarning onClose={() => setIfAlert(false)} />}
       <ShoppingItemAddForm
         formRef={formRef}
         handleInputChange={debounceHandleInputChange}
@@ -105,15 +116,11 @@ export default function RESTfulShoppingList() {
         placeholder="Enter your words to filter or create new"
       />
       <div className="mt-1">
-        {appError ? (
-          <SimpleWarning />
-        ) : (
-          <RESTfulShoppingListContent
-            isLoading={appIsLoading}
-            items={items}
-            handleItemRemove={handleItemRemove}
-          />
-        )}
+        <RESTfulShoppingListContent
+          isLoading={appIsLoading}
+          items={items}
+          handleItemRemove={handleItemRemove}
+        />
       </div>
     </div>
   );

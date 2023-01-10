@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import { ShoppingItemType } from "../../types/ShoppingItemType";
 import { Helmet } from "react-helmet";
 
-interface FormElements extends HTMLFormControlsCollection {
+export interface FormElements extends HTMLFormControlsCollection {
   contentInput: HTMLInputElement;
 }
 

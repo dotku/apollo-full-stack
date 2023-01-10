@@ -14,7 +14,7 @@ export function RESTfulShoppingListContent({
   handleItemRemove?: <IDType, EventType>(id: IDType) => (e: EventType) => void;
 }) {
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <SimpleWarning slog={error.toString()} />;
+  if (error) return <SimpleWarning />;
 
   return <ShoppingItemList items={items} handleItemRemove={handleItemRemove} />;
 }

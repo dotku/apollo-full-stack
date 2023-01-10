@@ -21,17 +21,16 @@ export default function ShoppingItemList({
   return newItems && newItems.length ? (
     <ul className="list-group list-group-flush">
       {newItems.map((item, idx) => (
-        <li
-          className="list-group-item d-flex justify-content-between"
-          key={idx}
-        >
-          <span>{item.content}</span>
-          <span
-            className="btn"
-            onClick={handleItemRemove && handleItemRemove(item.id)}
-          >
-            x
-          </span>
+        <li className="list-group-item" key={idx}>
+          <div className="d-flex justify-content-between">
+            <span>{item.content}</span>
+            <span
+              className="btn"
+              onClick={handleItemRemove && handleItemRemove(item.id)}
+            >
+              x
+            </span>
+          </div>
         </li>
       ))}
     </ul>
