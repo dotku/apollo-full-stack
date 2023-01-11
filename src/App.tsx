@@ -10,7 +10,6 @@ import ZustandShoppingList from "./pages/zustand-shopping-list";
 // @note, use hashRouter here for github hosting
 // github page won't able to support browserRouter due to server-side rendering
 // feature was disabled.
-
 const router = createHashRouter([
   {
     path: "/",

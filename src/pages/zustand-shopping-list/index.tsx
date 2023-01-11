@@ -104,7 +104,7 @@ export default function ZustandShoppingListIndex() {
       <Helmet>
         <title>{TITLE}</title>
       </Helmet>
-      <h1 className="pt-3">TITLE</h1>
+      <h1 className="pt-3">{TITLE}</h1>
       <ZustandController />
       <ZustandShoppingList className="mt-2" />
     </div>
