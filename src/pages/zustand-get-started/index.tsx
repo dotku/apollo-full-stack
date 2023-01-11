@@ -1,10 +1,8 @@
+import { Helmet } from "react-helmet";
 import create from "zustand";
+import { StateType } from "./types";
 
-interface StateType {
-  bears: number;
-  increasePopulation: () => void;
-  removeAllBears: () => void;
-}
+const TITLE = "Zustand Get Started";
 
 const useStore = create<StateType>((set) => ({
   bears: 0,
@@ -28,7 +26,8 @@ function BearControls() {
 export default function ZustandGetStarted() {
   return (
     <div className="container">
-      <h1>Zustand Get Started</h1>
+      <Helmet>{TITLE}</Helmet>
+      <h1>{TITLE}</h1>
       <BearCounter />
       <BearControls />
     </div>

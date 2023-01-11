@@ -1,13 +1,10 @@
 import { nanoid } from "nanoid";
 import { FormEvent, useRef } from "react";
+import { Helmet } from "react-helmet";
 import create from "zustand";
-import { ShoppingItemType } from "../../types/ShoppingItemType";
+import { StateType } from "./types";
 
-interface StateType {
-  shoppingItems: ShoppingItemType[];
-  createShoppingItem: (content?: string) => void;
-  deleteShoppingItem: (id: string) => void;
-}
+const TITLE = "Zustand Shopping List";
 
 const useStore = create<StateType>((set) => ({
   shoppingItems: [
@@ -18,6 +15,10 @@ const useStore = create<StateType>((set) => ({
     {
       id: nanoid(),
       content: "Banna",
+    },
+    {
+      id: nanoid(),
+      content: "Cake",
     },
   ],
   createShoppingItem: (content?: string) => {
@@ -100,7 +101,10 @@ function ZustandController() {
 export default function ZustandShoppingListIndex() {
   return (
     <div className="container">
-      <h1 className="pt-3">Zustand Shopping List</h1>
+      <Helmet>
+        <title>{TITLE}</title>
+      </Helmet>
+      <h1 className="pt-3">TITLE</h1>
       <ZustandController />
       <ZustandShoppingList className="mt-2" />
     </div>

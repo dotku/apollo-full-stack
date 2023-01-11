@@ -14,11 +14,7 @@ import { ShoppingItemType } from "../../types/ShoppingItemType";
 import { ShoppingListFormElement } from "../frontend-shopping-list/types";
 import ShoppingItemAddForm from "../frontend-shopping-list/components/ShoppingItemAddForm";
 import { RESTfulShoppingListContent } from "./RESTfulShoppingListContent";
-
-interface Env {
-  REACT_APP_DEBOUNCE_WAIT?: number;
-  REACT_APP_SERVER_URL?: string;
-}
+import { Env } from "./types";
 
 const { REACT_APP_DEBOUNCE_WAIT, REACT_APP_SERVER_URL } = process.env as Env;
 const TITLE = "RESTful Shoping List";

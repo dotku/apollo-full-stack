@@ -7,7 +7,8 @@ Applied: TypeScript, PropState Relationship with filter/search
 Applied: Express RESTFul API covers post (create), get (query), delete (remove),
 CORS Security, Request Praser
 4. Customized fetch hook interact with RESTful APIs
-Applied: debounce to reduce resource call, useCallback to manage functions
+Applied: customized hook, debounce to reduce resource call, useCallback to
+manage functions, env
 5. Trial out of Zustand (How fast I can learn?!)  
 Simple interesting new State management without a lot of boilpalet code (unlike Redux)
 6. Sample tests with Jest
