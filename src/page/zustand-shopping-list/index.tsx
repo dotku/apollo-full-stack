@@ -15,6 +15,10 @@ const useStore = create<StateType>((set) => ({
       id: nanoid(),
       content: "Apple",
     },
+    {
+      id: nanoid(),
+      content: "Banna",
+    },
   ],
   createShoppingItem: (content?: string) => {
     set((state: StateType) => {
@@ -37,19 +41,22 @@ const useStore = create<StateType>((set) => ({
   },
 }));
 
-function ZustandShoppingList() {
+function ZustandShoppingList({ className }: { className: string }) {
   const shoppingItems = useStore((state: StateType) => state.shoppingItems);
   const deleteShoppingItem = useStore(
     (state: StateType) => state.deleteShoppingItem
   );
 
   return (
-    <div>
+    <div className={className}>
       {shoppingItems.length ? (
-        <ul>
+        <ul className="list-group">
           {shoppingItems.map((item, idx) => (
-            <li key={idx} className="lh-lg">
-              {item.content}
+            <li
+              key={idx}
+              className="list-group-item d-flex justify-content-between"
+            >
+              <div className="lh-lg">{item.content}</div>
               <button
                 className="btn "
                 onClick={() => deleteShoppingItem(item.id)}
@@ -75,16 +82,18 @@ function ZustandController() {
   const handleItemCreate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addShoppingItem(inputRef.current?.value);
-    // inputRef.current = "";
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
   };
 
   return (
-    <>
-      <form onSubmit={handleItemCreate}>
-        <input ref={inputRef} />
-        <button type="submit">Create</button>
-      </form>
-    </>
+    <form onSubmit={handleItemCreate} className="input-group">
+      <input ref={inputRef} className="form-control" />
+      <button className="btn btn-outline-secondary" type="submit">
+        Create
+      </button>
+    </form>
   );
 }
 
@@ -93,7 +102,7 @@ export default function ZustandShoppingListIndex() {
     <div className="container">
       <h1 className="pt-3">Zustand Shopping List</h1>
       <ZustandController />
-      <ZustandShoppingList />
+      <ZustandShoppingList className="mt-2" />
     </div>
   );
 }
