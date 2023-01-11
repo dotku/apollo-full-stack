@@ -24,7 +24,7 @@ export default function FrontendShoppingList({
 
   const handleItemCreate = (e: FormEvent<ShoppingListFormElement>) => {
     e.preventDefault();
-    const content = e.currentTarget.elements.contentInput.value;
+    const { value: content } = e.currentTarget.elements.contentInput;
     setShoppingItems((curr: ShoppingItemType[]) => {
       return [
         ...curr,
@@ -36,6 +36,7 @@ export default function FrontendShoppingList({
     });
 
     setKeywords("");
+    e.currentTarget.elements.contentInput.value = "";
   };
 
   const handleInputChange = (e: FormEvent<HTMLInputElement>) => {

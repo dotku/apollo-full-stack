@@ -35,13 +35,13 @@ export const fullRouter: FullRouter[] = [
     element: <RESTfulShoppingList />,
   },
   {
-    name: "zustand sample project",
+    name: "Zustand Get Started",
     description: "A default sample grab from Zustand tutorial",
     path: "/zustand-get-started",
     element: <ZustandGetStarted />,
   },
   {
-    name: "zustand shopping list",
+    name: "Zustand Shopping list",
     description: "Use Zustand created a shopping list page",
     path: "/zustand-shopping-list",
     element: <ZustandShoppingList />,
@@ -49,7 +49,7 @@ export const fullRouter: FullRouter[] = [
   {
     name: "app react",
     description:
-      "Default React App, a backup for future potential need; eg a onboarding practice page?",
+      "Default React App, a backup for future potential need, e.g. a onboarding practice page?",
     path: "/react-default-home",
     element: <AppReact />,
   },
