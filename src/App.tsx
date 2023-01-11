@@ -1,11 +1,11 @@
 import "./App.css";
 import { defaultShoppingItems } from "./data/DefaultShoppingItems";
-import FrontendShoppingList from "./page/frontend-shopping-list";
+import FrontendShoppingList from "./pages/frontend-shopping-list";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import AppReact from "./App.React";
-import RESTfulShoppingList from "./page/restful-shopping-list";
-import ZustandGetStarted from "./page/zustand-get-started";
-import ZustandShoppingList from "./page/zustand-shopping-list";
+import RESTfulShoppingList from "./pages/restful-shopping-list";
+import ZustandGetStarted from "./pages/zustand-get-started";
+import ZustandShoppingList from "./pages/zustand-shopping-list";
 
 // @note, use hashRouter here for github hosting
 // github page won't able to support browserRouter due to server-side rendering

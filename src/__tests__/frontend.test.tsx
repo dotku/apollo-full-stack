@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import FrontendShoppingList from "../page/frontend-shopping-list";
+import FrontendShoppingList from "../pages/frontend-shopping-list";
 import { defaultShoppingItems } from "../data/DefaultShoppingItems";
 
 jest.mock("nanoid", () => {

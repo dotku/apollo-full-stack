@@ -4,14 +4,7 @@ import ShoppingItemList from "./components/ShoppingItemList";
 import { nanoid } from "nanoid";
 import { ShoppingItemType } from "../../types/ShoppingItemType";
 import { Helmet } from "react-helmet";
-
-export interface FormElements extends HTMLFormControlsCollection {
-  contentInput: HTMLInputElement;
-}
-
-export interface ShoppingListFormElement extends HTMLFormElement {
-  elements: FormElements;
-}
+import { ShoppingListFormElement } from "./types";
 
 export default function FrontendShoppingList({
   defaultData,

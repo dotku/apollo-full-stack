@@ -1,4 +1,4 @@
-import { ShoppingListFormElement } from "..";
+import { ShoppingListFormElement } from "../types";
 import { FormEvent } from "react";
 
 export default function ShoppingItemAddForm({

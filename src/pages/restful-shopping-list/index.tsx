@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet";
 import SimpleWarning from "../../components/SimpleWarning";
 import useFetch from "../../hook/useFetch";
 import { ShoppingItemType } from "../../types/ShoppingItemType";
-import { ShoppingListFormElement } from "../frontend-shopping-list";
+import { ShoppingListFormElement } from "../frontend-shopping-list/types";
 import ShoppingItemAddForm from "../frontend-shopping-list/components/ShoppingItemAddForm";
 import { RESTfulShoppingListContent } from "./RESTfulShoppingListContent";
 
