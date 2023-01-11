@@ -104,20 +104,22 @@ export default function RESTfulShoppingList() {
         <title>{TITLE}</title>
       </Helmet>
       <h2 className="pt-3">{TITLE}</h2>
-      {ifAlert && <SimpleWarning onClose={() => setIfAlert(false)} />}
-      <ShoppingItemAddForm
-        formRef={formRef}
-        handleInputChange={debounceHandleInputChange}
-        handleItemCreate={handleItemCreate}
-        placeholder="Enter your words to filter or create new"
-      />
-      <div className="mt-1">
-        <RESTfulShoppingListContent
-          isLoading={appIsLoading}
-          items={items}
-          handleItemRemove={handleItemRemove}
+      <section className="mw-500">
+        {ifAlert && <SimpleWarning onClose={() => setIfAlert(false)} />}
+        <ShoppingItemAddForm
+          formRef={formRef}
+          handleInputChange={debounceHandleInputChange}
+          handleItemCreate={handleItemCreate}
+          placeholder="Enter your words to filter or create new"
         />
-      </div>
+        <div className="mt-1">
+          <RESTfulShoppingListContent
+            isLoading={appIsLoading}
+            items={items}
+            handleItemRemove={handleItemRemove}
+          />
+        </div>
+      </section>
     </div>
   );
 }

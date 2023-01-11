@@ -48,7 +48,7 @@ export default function FrontendShoppingList({
         <title>Frontend Shopping List</title>
       </Helmet>
       <h2 className="pt-3">Shopping List</h2>
-      <div style={{ maxWidth: 500, padding: 10 }}>
+      <div className="mw-500 mt-1">
         <ShoppingItemAddForm
           handleItemCreate={handleItemCreate}
           handleInputChange={handleInputChange}

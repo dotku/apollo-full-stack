@@ -49,7 +49,7 @@ export default function Home() {
           />
         </header>
         {fullRouter.map((item, idx) => (
-          <div className="card mb-3 shadow" key={idx} style={{ maxWidth: 500 }}>
+          <div className="card mb-3 shadow mw-500" key={idx}>
             <div className="card-body">
               <div className="card-title">
                 <Link to={item.path} className="text-capitalize">

@@ -23,13 +23,6 @@ export const fullRouter: FullRouter[] = [
     element: <Home />,
   },
   {
-    name: "app react",
-    description:
-      "Default React App, a backup for future potential need; eg a onboarding practice page?",
-    path: "/react-default-home",
-    element: <AppReact />,
-  },
-  {
     name: "frontend",
     description: "A basic frontend interaction sample",
     path: "/frontend",
@@ -52,6 +45,13 @@ export const fullRouter: FullRouter[] = [
     description: "Use Zustand created a shopping list page",
     path: "/zustand-shopping-list",
     element: <ZustandShoppingList />,
+  },
+  {
+    name: "app react",
+    description:
+      "Default React App, a backup for future potential need; eg a onboarding practice page?",
+    path: "/react-default-home",
+    element: <AppReact />,
   },
 ];
 
