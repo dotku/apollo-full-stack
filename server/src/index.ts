@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import bodyParser from "body-parser";
 // import shoppingItems from "./shopping-items";
 import insurance from "./insurance";
@@ -19,7 +19,7 @@ app.use(
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use((err: any, _req: any, res: any, next: Function) => {
+app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   if (err) {
     res.status(400).send("error parsing data");
   } else {
