@@ -5,5 +5,5 @@ export interface InsuranceApplication {
   id: string;
   primary: Applicant;
   joins?: Applicant[];
-  vehicles: Vehicle[];
+  vehicles?: Vehicle[];
 }

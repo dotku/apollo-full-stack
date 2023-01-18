@@ -13,14 +13,16 @@ var app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "https://cdpn.io"],
   })
 );
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   if (err) {
+    console.log("app.use error");
     res.status(400).send("error parsing data");
   } else {
     next();
