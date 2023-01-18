@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-import shoppingItems from "./shopping-items.js";
+// import shoppingItems from "./shopping-items";
+import insurance from "./insurance";
 import cors from "cors";
 
 var app = express();
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Require the Router we defined in shopping-items.js
 
 //Use the Router on the sub route /shopping-items
-app.use("/shopping-items", shoppingItems);
+// app.use("/shopping-items", shoppingItems);
+app.use("/insurance", insurance);
 
 app.listen(3030);
