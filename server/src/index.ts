@@ -19,6 +19,13 @@ app.use(
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use((err: any, _req: any, res: any, next: Function) => {
+  if (err) {
+    res.status(400).send("error parsing data");
+  } else {
+    next();
+  }
+});
 
 //Require the Router we defined in shopping-items.js
 
