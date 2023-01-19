@@ -20,7 +20,13 @@ function BearControls() {
   const increasePopulation = useStore(
     (state: StateType) => state.increasePopulation
   );
-  return <button onClick={increasePopulation}>one up</button>;
+  const removeAllBears = useStore((state: StateType) => state.removeAllBears);
+  return (
+    <>
+      <button onClick={increasePopulation}>one up</button>
+      <button onClick={removeAllBears}>Remove</button>
+    </>
+  );
 }
 
 export default function ZustandGetStarted() {

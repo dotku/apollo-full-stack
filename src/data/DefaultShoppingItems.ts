@@ -4,7 +4,7 @@ import { ShoppingItemType } from "../types/ShoppingItemType";
 export const defaultShoppingItems: ShoppingItemType[] = [
   {
     id: nanoid(),
-    content: "apple",
+    content: "apple 123",
   },
   {
     id: nanoid(),
