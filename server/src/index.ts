@@ -33,6 +33,7 @@ app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
 
 //Use the Router on the sub route /shopping-items
 // app.use("/shopping-items", shoppingItems);
+
 app.use("/insurance", insurance);
 app.use("/", (_req, res) => res.send("Hello World!"));
 
