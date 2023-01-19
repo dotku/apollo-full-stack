@@ -1,4 +1,11 @@
-import { FormEvent, MouseEventHandler, useContext, useState } from "react";
+import {
+  MouseEvent,
+  MouseEventHandler,
+  SyntheticEvent,
+  useContext,
+  useRef,
+  useState,
+} from "react";
 import { Vehicle } from "../../types/Vehicle";
 import { nanoid } from "nanoid";
 import { InsurranceContext } from ".";
@@ -12,6 +19,9 @@ export default function VehicleCreateForm({
 }) {
   const { insuranceApplication: insurranceApplication } =
     useContext(InsurranceContext);
+  const vinInputRef = useRef<HTMLInputElement>(null);
+  const makerInputRef = useRef<HTMLInputElement>(null);
+  const modelInputRef = useRef<HTMLInputElement>(null);
 
   const defaultVehicle = {
     vin: nanoid(),
@@ -28,7 +38,8 @@ export default function VehicleCreateForm({
   const [vehicle, setVehicle] = useState(defaultVehicle);
   const [error, setError] = useState("");
 
-  const handleCreateVehicleClick = () => {
+  const handleCreateVehicleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     console.log("insurranceApplication", insurranceApplication);
     if (
       insurranceApplication &&
@@ -37,10 +48,19 @@ export default function VehicleCreateForm({
     ) {
       return setError(`Vehicles number limit is ${REACT_APP_VEHICLE_LIMIT}`);
     }
-    // @todo should highlight/focus the error input
-    if (!vehicle.vin) return setError("vin is required");
-    if (!vehicle.maker) return setError("maker is required");
-    if (!vehicle.model) return setError("model is required");
+
+    if (!vehicle.vin) {
+      vinInputRef.current?.focus();
+      return setError("vin is required");
+    }
+    if (!vehicle.maker) {
+      makerInputRef.current?.focus();
+      return setError("maker is required");
+    }
+    if (!vehicle.model) {
+      modelInputRef.current?.focus();
+      return setError("model is required");
+    }
     handleVehicleCreate && handleVehicleCreate(vehicle);
     setVehicle(emptyVehicle);
     setError("");
@@ -51,6 +71,7 @@ export default function VehicleCreateForm({
       <div>
         <label htmlFor="vin">vin</label>
         <input
+          ref={vinInputRef}
           className="form-control"
           value={vehicle.vin}
           id="vin"
@@ -82,6 +103,7 @@ export default function VehicleCreateForm({
       <div>
         <label htmlFor="maker">maker</label>
         <input
+          ref={makerInputRef}
           className="form-control"
           value={vehicle.maker}
           id="maker"
@@ -96,6 +118,7 @@ export default function VehicleCreateForm({
       <div>
         <label htmlFor="model">model</label>
         <input
+          ref={modelInputRef}
           className="form-control"
           value={vehicle.model}
           id="model"
@@ -109,7 +132,7 @@ export default function VehicleCreateForm({
       </div>
       <div className="text-center">
         <button
-          type="submit"
+          type="button"
           className="btn btn-outline-dark my-3"
           onClick={handleCreateVehicleClick}
         >

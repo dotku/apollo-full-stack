@@ -51,6 +51,33 @@ router.get("/resume", (_req, res) => {
   });
 });
 
+router.put("/", (req, res) => {
+  const foundIndex = tempApplications.findIndex(
+    (item) => item?.id === req.body.id
+  );
+  if (foundIndex >= 0) {
+    tempApplications[foundIndex] = req.body;
+    res.send({
+      message: "put request sucessfully",
+    });
+  } else {
+    res.status(404).send({
+      code: 404,
+      message: "not found",
+    });
+  }
+});
+
+router.post("/quote", (_req, res) => {
+  const quote = 39;
+  res.send({
+    quote,
+    message: `Congratuation! The best quote you can get is $${quote.toFixed(
+      2
+    )}/mo!`,
+  });
+});
+
 router.get("/resume/:id", (req, res) => {
   const { id } = req.params;
 

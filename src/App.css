@@ -13,6 +13,10 @@ a {
   pointer-events: none;
 }
 
+.no-date-clear::-webkit-clear-button {
+  display: none;
+}
+
 .mw-500 {
   max-width: 500px;
 }

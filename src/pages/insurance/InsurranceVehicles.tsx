@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { InsurranceContext } from ".";
 import { Vehicle } from "../../types/Vehicle";
 import VehicleCreateForm from "./VehicleCreateForm";
@@ -10,11 +10,16 @@ export default function InsurranceVehicles({
 }: {
   vehicles?: Vehicle[];
 }) {
-  const {
-    insuranceApplication: insurranceApplication,
-    setInsuranceApplication: setInsurranceApplication,
-  } = useContext(InsurranceContext);
-  const [vehicles, setVehicles] = useState(defaultVehicles || []);
+  const { insuranceApplication, setInsuranceApplication } =
+    useContext(InsurranceContext);
+  const [vehicles, setVehicles] = useState(
+    insuranceApplication?.vehicles || defaultVehicles || []
+  );
+
+  useEffect(() => {
+    insuranceApplication?.vehicles &&
+      setVehicles(insuranceApplication?.vehicles);
+  }, [insuranceApplication]);
 
   const handleVheichleCreate = (vehicle: Vehicle) => {
     if (vehicles.length >= REACT_APP_VEHICLE_LIMIT) {
@@ -25,9 +30,9 @@ export default function InsurranceVehicles({
     vehicles.push(vehicle);
     console.log(vehicles);
     setVehicles([...vehicles]);
-    setInsurranceApplication &&
-      setInsurranceApplication({
-        ...insurranceApplication,
+    setInsuranceApplication &&
+      setInsuranceApplication({
+        ...insuranceApplication,
         vehicles,
       });
   };
